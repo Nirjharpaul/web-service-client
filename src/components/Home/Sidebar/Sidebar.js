@@ -14,7 +14,7 @@ const Sidebar = () => {
             <ul className="list-unstyled">
                 <li>
                     <Link to="/home" className="text-dark">
-                        <img className="img-fluid w-50 ml-5" src={logo} alt="" />
+                        <img style={{ height: "50px" }} className="img-fluid ml-5" src={logo} alt="" />
                     </Link>
                 </li>
                 <li>
