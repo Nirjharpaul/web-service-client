@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import './Sidebar.css'
+import './AdminSidebar.css'
 import logo from "../../../images/logo.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus, faList, faCommentDots, } from '@fortawesome/free-solid-svg-icons';
@@ -18,18 +18,23 @@ const Sidebar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/order/:`${name}`" className="text-dark">
-                        <FontAwesomeIcon icon={faCartPlus} /> <span>Order</span>
+                    <Link to="/detailOrderList" className="text-dark">
+                        <FontAwesomeIcon icon={faCartPlus} /> <span>Detail Order List</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/OrderList" className="text-dark">
-                        <FontAwesomeIcon icon={faList} /> <span>Order List</span>
+                    <Link to="/addService" className="text-dark">
+                        <FontAwesomeIcon icon={faList} /> <span>Add Service</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/review" className="text-dark">
-                        <FontAwesomeIcon icon={faCommentDots} /> <span>Review</span>
+                    <Link to="/makeAdmin" className="text-dark">
+                        <FontAwesomeIcon icon={faCommentDots} /> <span>Make Admin</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/manageService" className="text-dark">
+                        <FontAwesomeIcon icon={faListAlt} /> <span>Manage Service</span>
                     </Link>
                 </li>
             </ul>

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import Sidebar from '../Sidebar/Sidebar';
+import AdminSidebar from '../AdminSidebar/AdminSidebar'
 
-const Review = () => {
+
+
+const AddService = () => {
 
     const [info, setInfo] = useState({});
     const [file, setFile] = useState(null);
@@ -23,7 +25,7 @@ const Review = () => {
         formData.append('name', info.name);
         formData.append('email', info.email);
 
-        fetch('http://localhost:5000/addReview', {
+        fetch('http://localhost:5000/addService', {
             method: 'POST',
             body: formData
         })
@@ -38,21 +40,18 @@ const Review = () => {
 
     return (
         <section className="container-fluid row">
-            <Sidebar />
+            <AdminSidebar />
             <div className="col-md-10 p-4 pr-5" style={{ position: 'absolute', right: 0 }}>
-                <h5>Review</h5>
+                <h5>Add Service</h5>
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group mt-5">
-                        <label htmlFor="exampleInputEmail1">Email address</label>
-                        <input onBlur={handleBlur} type="email" className="form-control" name="email" placeholder="Enter email" />
-                    </div>
+
                     <div className="form-group mt-3">
-                        <label htmlFor="exampleInputPassword1">Name</label>
-                        <input onBlur={handleBlur} type="text" className="form-control" name="name" placeholder="Name" />
+                        <label htmlFor="exampleInputPassword1">Service Title</label>
+                        <input onBlur={handleBlur} type="text" className="form-control" name="name" placeholder="Enter title" />
                     </div>
                     <div className="form-group mt-3">
                         <label htmlFor="exampleInputPassword1">Description</label>
-                        <input onBlur={handleBlur} type="description" className="form-control" name="description" placeholder="Description" />
+                        <input onBlur={handleBlur} type="description" className="form-control" name="description" placeholder="Enter Description" />
                     </div>
                     <div className="form-group mt-3">
                         <label htmlFor="exampleInputPassword1">Upload a image</label>
@@ -65,4 +64,4 @@ const Review = () => {
     );
 };
 
-export default Review;
+export default AddService;
