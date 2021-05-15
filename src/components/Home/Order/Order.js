@@ -1,5 +1,7 @@
 import React from 'react';
+import CheckoutForm from '../../CheckoutFrom/CheckoutForm';
 import Sidebar from '../Sidebar/Sidebar';
+import CreditCard from '../../../images/credit-card 1.png'
 
 const Order = () => {
     return (
@@ -20,7 +22,12 @@ const Order = () => {
                         <label htmlFor="exampleInputPassword1">Description</label>
                         <input type="description" className="form-control" name="description" placeholder="Description" />
                     </div>
+
                 </form>
+                <div className="mt-5">
+                    <h4>Pay with stripe <img src={CreditCard} alt="" /></h4>
+                    <CheckoutForm />
+                </div>
             </div>
         </section>
     );

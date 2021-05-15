@@ -8,17 +8,20 @@ const serviceData = [
     {
         title: 'Web Design',
         description: 'It is a long established fact that a reader will be distracted by the readable',
-        icon: icon1
+        icon: icon1,
+        price: '$375'
     },
     {
         title: 'Web Development',
         description: 'It is a long established fact that a reader will be distracted by the readable',
-        icon: icon2
+        icon: icon2,
+        price: '$675'
     },
     {
         title: 'Social Media Marketing',
         description: 'It is a long established fact that a reader will be distracted',
-        icon: icon3
+        icon: icon3,
+        price: '$275'
     }
 ]
 const Services = () => {
