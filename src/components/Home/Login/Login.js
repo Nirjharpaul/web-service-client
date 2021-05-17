@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
 import logo from '../../../images/logo.png'
 import image from '../../../images/googleIcon.png'
-import { Link } from 'react-router-dom';
-
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { userLogIn } from '../../../App';
 
 
 if (firebase.apps.length === 0) {
@@ -13,16 +13,25 @@ if (firebase.apps.length === 0) {
 }
 
 const Login = () => {
+    const [user, setUser] = useContext(userLogIn);
+    console.log(user);
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
 
+    const history = useHistory();
+    const location = useLocation();
 
-    var provider = new firebase.auth.GoogleAuthProvider();
+    const { from } = location.state || { from: { pathname: "/" } }
 
     const handleGoogleSignIn = () => {
 
         firebase.auth()
-            .signInWithPopup(provider)
+            .signInWithPopup(googleProvider)
             .then((result) => {
-                console.log(result.user);
+                const user = result.user;
+                const loggedInUser = { name: user.displayName, email: user.email, img: user.photoURL };
+                setUser(loggedInUser);
+                history.replace(from);
+                localStorage.setItem('user', JSON.stringify(loggedInUser));
             }).catch((error) => {
                 console.log(error);
             });

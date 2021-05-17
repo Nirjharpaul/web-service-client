@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,49 +15,53 @@ import AddService from './components/Admin/AddService/AddService';
 import MakeAdmin from './components/Admin/MakeAdmin/MakeAdmin';
 import DetailOrderList from './components/Admin/DetailOrderList/DetailOrderList';
 import ManageService from './components/Admin/ManageService/ManageService';
+import PrivateRoute from './components/Home/Login/PrivateRoute/PrivateRoute';
 
 
-
+export const userLogIn = createContext();
 
 function App() {
 
+  const [user, setUser] = useState({});
+
   return (
 
-    <Router>
-      <Switch>
-        <Route path="/home" >
-          <Home />
-        </Route>
-        <Route path="/login" >
-          <Login />
-        </Route>
-        <Route path="/review" >
-          <Review />
-        </Route>
-        <Route path="/order" >
-          <Order />
-        </Route>
-        <Route path="/orderList" >
-          <OrderList />
-        </Route>
-        <Route path="/detailOrderList" >
-          <DetailOrderList />
-        </Route>
-        <Route path="/addService" >
-          <AddService />
-        </Route>
-        <Route path="/makeAdmin" >
-          <MakeAdmin />
-        </Route>
-        <Route path="/manageService" >
-          <ManageService />
-        </Route>
-        <Route exact path="/" >
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
-
+    <userLogIn.Provider value={[user, setUser]}>
+      <Router>
+        <Switch>
+          <Route path="/home" >
+            <Home />
+          </Route>
+          <Route path="/login" >
+            <Login />
+          </Route>
+          <PrivateRoute path="/review" >
+            <Review />
+          </PrivateRoute>
+          <PrivateRoute path="/order" >
+            <Order />
+          </PrivateRoute>
+          <PrivateRoute path="/orderList" >
+            <OrderList />
+          </PrivateRoute>
+          <Route path="/detailOrderList" >
+            <DetailOrderList />
+          </Route>
+          <Route path="/addService" >
+            <AddService />
+          </Route>
+          <Route path="/makeAdmin" >
+            <MakeAdmin />
+          </Route>
+          <Route path="/manageService" >
+            <ManageService />
+          </Route>
+          <Route exact path="/" >
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+    </userLogIn.Provider>
 
   );
 }
