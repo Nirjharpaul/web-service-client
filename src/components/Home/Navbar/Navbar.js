@@ -1,41 +1,45 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../../../images/logo.png'
+import React from "react";
+import { Button, Nav, Navbar } from "react-bootstrap";
+import { Link, NavLink } from "react-router-dom";
+import logo from "../../../images/logo.png";
 
-const Navbar = () => {
-    return (
-        <div className="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-                <a class="navbar-brand" href="#"> <img style={{ height: '4rem' }} src={logo} alt="" /> </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item active me-5">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item me-5">
-                            <a class="nav-link" href="#">About Us</a>
-                        </li>
-                        <li class="nav-item me-5">
-                            <a class="nav-link" href="#">Projects</a>
-                        </li>
-                        <li class="nav-item me-5">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
-                        <li class="nav-item me-5">
-                            <a class="nav-link" href="#">Admin</a>
-                        </li>
-
-                    </ul>
-
-                    <Link to='/login'><button class="btn button-style" type="submit">Login</button></Link>
-                </div>
-            </nav>
-        </div>
-    );
+const Header = () => {
+  const activeMenu = {
+    borderBottom: "2px solid #ffdf1b",
+    color: "#ffdf1b !important",
+  };
+  return (
+    <Navbar className="navbar-bg" expand="lg">
+      <div className="container">
+        <Navbar.Brand as={Link} to="/">
+          <img src={logo} alt="" className="img-fluid" width="100px" />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
+            <Nav.Link as={NavLink} exact activeStyle={activeMenu} to="/">
+              Home
+            </Nav.Link>
+            <Nav.Link as={NavLink} activeStyle={activeMenu} to="/about">
+              About Us
+            </Nav.Link>
+            <Nav.Link as={NavLink} activeStyle={activeMenu} to="/project">
+              Projects
+            </Nav.Link>
+            <Nav.Link as={NavLink} activeStyle={activeMenu} to="/contact">
+              Contact
+            </Nav.Link>
+            <Nav.Link as={NavLink} activeStyle={activeMenu} to="/admin">
+              Admin
+            </Nav.Link>
+            <Nav.Link as={NavLink} activeStyle={activeMenu} to="/login">
+              <Button>Login</Button>
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </div>
+    </Navbar>
+  );
 };
 
-export default Navbar;
+export default Header;
