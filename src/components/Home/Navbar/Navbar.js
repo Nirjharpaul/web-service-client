@@ -16,7 +16,7 @@ const Header = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav className="ms-auto p-3">
             <Nav.Link as={NavLink} exact activeStyle={activeMenu} to="/">
               Home
             </Nav.Link>

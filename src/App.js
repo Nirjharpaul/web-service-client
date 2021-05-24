@@ -16,6 +16,7 @@ import MakeAdmin from './components/Admin/MakeAdmin/MakeAdmin';
 import DetailOrderList from './components/Admin/DetailOrderList/DetailOrderList';
 import ManageService from './components/Admin/ManageService/ManageService';
 import PrivateRoute from './components/Home/Login/PrivateRoute/PrivateRoute';
+import Admin from './components/Admin/Admin/Admin';
 
 
 export const userLogIn = createContext();
@@ -44,17 +45,20 @@ function App() {
           <PrivateRoute path="/orderList" >
             <OrderList />
           </PrivateRoute>
-          <PrivateRoute path="/detailOrderList" >
+          <Route path="/detailOrderList" >
             <DetailOrderList />
-          </PrivateRoute>
-          <PrivateRoute path="/addService" >
+          </Route>
+          <Route path="/addService" >
             <AddService />
-          </PrivateRoute>
-          <PrivateRoute path="/makeAdmin" >
+          </Route>
+          <Route path="/makeAdmin" >
             <MakeAdmin />
-          </PrivateRoute>
+          </Route>
           <Route path="/manageService" >
             <ManageService />
+          </Route>
+          <Route path="/admin" >
+            <Admin />
           </Route>
           <Route exact path="/" >
             <Home />

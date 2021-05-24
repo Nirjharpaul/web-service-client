@@ -5,6 +5,7 @@ import { userLogIn } from "../../../App";
 const ServiceDetail = ({ service }) => {
   const { title, price, description, imageUrl } = service;
   const [user, setUser] = useContext(userLogIn);
+
   const handleOrder = (id) => {
     fetch(`http://localhost:5000/addOrder`, {
       method: "POST",
@@ -24,7 +25,7 @@ const ServiceDetail = ({ service }) => {
         <div>
           <img className="w-25" src={imageUrl} alt="" />
           <h5 className="mt-3">{title}</h5>
-          <h5 className="mt-3">{price}</h5>
+          <h5 className="mt-3">${price}</h5>
           <p className="mt-3">{description}</p>
         </div>
       </Link>

@@ -1,40 +1,52 @@
 import React, { useState } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
+import axios from 'axios';
 
 const Review = () => {
 
-    const [info, setInfo] = useState({});
-    const [file, setFile] = useState(null);
+    const [image, setImage] = useState(null);
+    const [value, setValue] = useState({
+        name: "",
+        designation: "",
+        description: "",
+        message: ""
+    })
 
-    const handleBlur = e => {
-        const newInfo = { ...info };
+    const handleChange = (e) => {
+        const newInfo = { ...value };
         newInfo[e.target.name] = e.target.value;
-        setInfo(newInfo);
-    }
+        setValue(newInfo);
+    };
 
     const handleFileChange = (e) => {
-        const newFile = e.target.files[0];
-        setFile(newFile);
-    }
-    const handleSubmit = () => {
-        const formData = new FormData()
-        console.log(info);
-        formData.append('file', file);
-        formData.append('name', info.name);
-        formData.append('email', info.email);
-
-        fetch('http://localhost:5000/addReview', {
-            method: 'POST',
-            body: formData
+        const imageData = new FormData();
+        imageData.set("key", "cde753ff113ae6fb392cb4252780269b");
+        imageData.append("image", e.target.files[0]);
+        axios.post(`https://api.imgbb.com/1/upload`, imageData).then((result) => {
+            setImage(result.data.data.display_url);
+        });
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const fieldData = { ...value };
+        fieldData.imageUrl = image;
+        fetch("http://localhost:5000/addReview", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(fieldData)
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
+            .then((response) => response.json())
+            .then(() => {
+                const msg = { ...value };
+                msg.message = "Product Inserted Successfully"
+                setValue(msg)
             })
-            .catch(error => {
-                console.error(error)
-            })
-    }
+            .catch((error) => {
+                console.error(error);
+            });
+    };
 
     return (
         <section className="container-fluid row">
@@ -42,17 +54,20 @@ const Review = () => {
             <div className="col-md-10 p-4 pr-5" style={{ position: 'absolute', right: 0 }}>
                 <h5>Review</h5>
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group mt-5">
-                        <label htmlFor="exampleInputEmail1">Email address</label>
-                        <input onBlur={handleBlur} type="email" className="form-control" name="email" placeholder="Enter email" />
-                    </div>
+                    {
+                        value.message && <p className="alert alert-success">{value.message}</p>
+                    }
                     <div className="form-group mt-3">
                         <label htmlFor="exampleInputPassword1">Name</label>
-                        <input onBlur={handleBlur} type="text" className="form-control" name="name" placeholder="Name" />
+                        <input onChange={handleChange} type="text" className="form-control" name="name" placeholder="Name" />
+                    </div>
+                    <div className="form-group mt-3">
+                        <label htmlFor="exampleInputPassword1">Designation</label>
+                        <input onChange={handleChange} type="designation" className="form-control" name="description" placeholder="Designation" />
                     </div>
                     <div className="form-group mt-3">
                         <label htmlFor="exampleInputPassword1">Description</label>
-                        <input onBlur={handleBlur} type="description" className="form-control" name="description" placeholder="Description" />
+                        <input onChange={handleChange} type="description" className="form-control" name="description" placeholder="Description" />
                     </div>
                     <div className="form-group mt-3">
                         <label htmlFor="exampleInputPassword1">Upload a image</label>
