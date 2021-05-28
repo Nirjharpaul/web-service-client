@@ -21,6 +21,7 @@ import Admin from './components/Admin/Admin/Admin';
 
 export const userLogIn = createContext();
 
+
 function App() {
 
   const [user, setUser] = useState({});
@@ -39,7 +40,7 @@ function App() {
           <PrivateRoute path="/review" >
             <Review />
           </PrivateRoute>
-          <PrivateRoute path="/order" >
+          <PrivateRoute path="/order/:id" >
             <Order />
           </PrivateRoute>
           <PrivateRoute path="/orderList" >
