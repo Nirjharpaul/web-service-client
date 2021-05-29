@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AdminSidebar from "../AdminSidebar/AdminSidebar";
 
 const DetailOrderList = () => {
-  // const [details, setDetails] = useState([])
-  // console.log(details)
-  // useEffect(() => {
-  //     fetch('https://afternoon-beach-11581.herokuapp.com/orders')
-  //     .then(res => res.json())
-  //     .then(result => {
-  //         setDetails(result)
-  //     })
-  // }, [])
+
+  const [order, setOrder] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/getSpecificOrder`,)
+      .then(res => res.json())
+      .then(data => {
+        setOrder(data)
+      })
+  }, []);
 
   return (
     <section className="container-fluid row">
@@ -36,23 +37,32 @@ const DetailOrderList = () => {
                   Service
                 </th>
                 <th className="text-secondary" scope="col">
+                  Description
+                </th>
+                <th className="text-secondary" scope="col">
                   Status
                 </th>
               </tr>
             </thead>
-            {/* <tbody>
-                            {
-                                details.map((details) =>
-                                    <tr>
-                                        <td>{details.name}</td>
-                                        <td>{details.email}</td>
-                                        <td>{details.service}</td>
-                                        <td className="text-justify">{details.description}</td>
-                                        <td className="text-danger">Pending</td>
-                                    </tr>
-                                )
-                            }
-                        </tbody> */}
+            <tbody>
+              {
+                order.map((details) =>
+                  <tr>
+                    <td>{details.name}</td>
+                    <td>{details.email}</td>
+                    <td>{details.title}</td>
+                    <td className="text-justify">{details.description}</td>
+                    <td className="text-danger">
+                      <select name="button" className="btn button-style">
+                        <option value="Pending">Pending</option>
+                        <option value="On Going">On Going</option>
+                        <option value="Done">Done</option>
+                      </select>
+                    </td>
+                  </tr>
+                )
+              }
+            </tbody>
           </table>
         </div>
       </div>

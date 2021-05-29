@@ -45,7 +45,7 @@ const Order = () => {
                 </div>
                 <div className="mt-5">
                     <h4>Pay with stripe <img src={CreditCard} alt="" /></h4>
-                    <CheckoutForm />
+                    <CheckoutForm service={service} />
                 </div>
             </div>
         </section>

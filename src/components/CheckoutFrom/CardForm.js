@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useState } from 'react';
+import { userLogIn } from '../../App';
 
-const CardForm = () => {
+const CardForm = ({ service }) => {
+
+    const [loggedInUser, setLoggedInUser] = useContext(userLogIn);
     const stripe = useStripe();
     const elements = useElements();
 
@@ -10,6 +13,7 @@ const CardForm = () => {
     const [paymentSuccess, setPaymentSuccess] = useState(null);
 
     const handleSubmit = async (event) => {
+
         // Block native form submission.
         event.preventDefault();
 
@@ -38,7 +42,29 @@ const CardForm = () => {
             setPaymentError(null);
 
         }
+
+        const orderData = {
+            name: loggedInUser.name,
+            email: loggedInUser.email,
+            title: service.title,
+            description: service.description,
+            imageUrl: service.imageUrl,
+            price: service.price,
+            button: "Pending"
+
+        }
+
+        fetch(`http://localhost:5000/addOrder`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(orderData)
+        });
+
+        console.log(service);
     };
+
 
     return (
         <div>

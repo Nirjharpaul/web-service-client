@@ -7,13 +7,13 @@ const ServiceDetail = ({ service }) => {
   const [user, setUser] = useContext(userLogIn);
 
   const handleOrder = (id) => {
-    fetch(`http://localhost:5000/addOrder`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify()
-    });
+    // fetch(`http://localhost:5000/addOrder`, {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify()
+    // });
   };
   return (
     <div className="col-md-4 text-center mt-3">
