@@ -13,6 +13,24 @@ const DetailOrderList = () => {
       })
   }, []);
 
+  // const id = order.find(data=>data._id === data.name)
+
+  const [status, setStatus] = useState({
+    button: "",
+  });
+
+  const handleChange = (e, id) => {
+
+    const values = { ...status }
+    values[e.target.name] = e.target.value
+    setStatus(values);
+    console.log(status);
+    fetch(`http://localhost:5000/statusUpdate/${id}`, {
+      method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(status)
+    })
+
+  }
+
   return (
     <section className="container-fluid row">
       <div className="col-md-4">
@@ -47,13 +65,14 @@ const DetailOrderList = () => {
             <tbody>
               {
                 order.map((details) =>
+
                   <tr>
                     <td>{details.name}</td>
                     <td>{details.email}</td>
                     <td>{details.title}</td>
                     <td className="text-justify">{details.description}</td>
                     <td className="text-danger">
-                      <select name="button" className="btn button-style">
+                      <select onChange={(e) => handleChange(e, details.id)} name="button" className="btn button-style">
                         <option value="Pending">Pending</option>
                         <option value="On Going">On Going</option>
                         <option value="Done">Done</option>

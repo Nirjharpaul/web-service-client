@@ -18,6 +18,21 @@ const Sidebar = () => {
                     </Link>
                 </li>
                 <li>
+                    <Link to="/order/:`${name}`" className="text-dark">
+                        <FontAwesomeIcon icon={faCartPlus} /> <span>Order</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/OrderList" className="text-dark">
+                        <FontAwesomeIcon icon={faList} /> <span>Order List</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/review" className="text-dark">
+                        <FontAwesomeIcon icon={faCommentDots} /> <span>Review</span>
+                    </Link>
+                </li>
+                <li>
                     <Link to="/detailOrderList" className="text-dark">
                         <FontAwesomeIcon icon={faCartPlus} /> <span>Detail Order List</span>
                     </Link>

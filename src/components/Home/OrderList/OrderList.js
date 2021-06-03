@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Sidebar from '../Sidebar/Sidebar';
+import AdminSidebar from '../../Admin/AdminSidebar/AdminSidebar';
 
 
 
@@ -17,7 +17,7 @@ const OrderList = () => {
 
     return (
         <section className="container-fluid row">
-            <Sidebar />
+            <AdminSidebar />
             <div className="col-md-10 p-4 pr-5" style={{ position: 'absolute', right: 0 }}>
                 <h5>Order List</h5>
                 {

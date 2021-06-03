@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from '../Sidebar/Sidebar';
+import AdminSidebar from '../../Admin/AdminSidebar/AdminSidebar';
 import axios from 'axios';
 
 const Review = () => {
@@ -50,7 +50,7 @@ const Review = () => {
 
     return (
         <section className="container-fluid row">
-            <Sidebar />
+            <AdminSidebar />
             <div className="col-md-10 p-4 pr-5" style={{ position: 'absolute', right: 0 }}>
                 <h5>Review</h5>
                 <form onSubmit={handleSubmit}>
