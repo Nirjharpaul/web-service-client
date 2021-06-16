@@ -19,14 +19,17 @@ const DetailOrderList = () => {
     button: "",
   });
 
-  const handleChange = (e, id) => {
+  const handleChange = (e, _id) => {
 
     const values = { ...status }
     values[e.target.name] = e.target.value
     setStatus(values);
     console.log(status);
-    fetch(`http://localhost:5000/statusUpdate/${id}`, {
-      method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(status)
+
+    fetch(`http://localhost:5000/statusUpdate/${_id}`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(status)
     })
 
   }
@@ -72,7 +75,7 @@ const DetailOrderList = () => {
                     <td>{details.title}</td>
                     <td className="text-justify">{details.description}</td>
                     <td className="text-danger">
-                      <select onChange={(e) => handleChange(e, details.id)} name="button" className="btn button-style">
+                      <select onBlur={(e) => handleChange(e, details._id)} name="button" className="btn button-style">
                         <option value="Pending">Pending</option>
                         <option value="On Going">On Going</option>
                         <option value="Done">Done</option>
